@@ -7,6 +7,15 @@ block content
         h3
           | Please Log In, or 
           a(href='/signup') Sign Up
+        if success_msg
+          each msg, i in success_msg
+            .alert.alert-success #{success_msg}
+        if error_msg
+          each msg, i in error_msg
+            .alert.alert-danger #{error_msg}   
+        if error
+          each msg, i in error
+            .alert.alert-danger #{error}
         .row
           .col-xs-6.col-sm-6.col-md-6
             a.btn.btn-lg.btn-primary.btn-block(href='#') Facebook
@@ -15,17 +24,12 @@ block content
         .login-or
           hr.hr-or
           span.span-or or
-        form(role='form')
+        form(role='form', method='POST', action='/login')
           .form-group
-            label(for='inputUsernameEmail') Username or email
-            input#inputUsernameEmail.form-control(type='text')
+            label(for='inputUsername') Username
+            input#inputUsername.form-control(type='text', name='username', placeholder='username')
           .form-group
-            a.pull-right(href='#') Forgot password?
             label(for='inputPassword') Password
-            input#inputPassword.form-control(type='password')
-          .checkbox.pull-right
-            label
-              input(type='checkbox')
-              |             Remember me
+            input#inputPassword.form-control(type='password', name='password', placeholder='password')
           button.btn.btn.btn-primary(type='submit')
             | Log In

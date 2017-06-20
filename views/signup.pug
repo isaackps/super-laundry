@@ -4,8 +4,11 @@ block content
   .container.form
     .row
       .main
-        h3
-          | Sign Up
+        h3.title= title
+        if errors
+          each error, i in errors
+            .alert.alert-danger #{error.msg}
+          
         .row
         form(role='form', method='POST', action='/signup')
           .form-group
