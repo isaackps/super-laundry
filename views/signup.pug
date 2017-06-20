@@ -1,0 +1,24 @@
+extends layout
+
+block content
+  .container.form
+    .row
+      .main
+        h3
+          | Sign Up
+        .row
+        form(role='form', method='POST', action='/signup')
+          .form-group
+            label(for='username') Username
+            input.form-control(type='text', name='username', placeholder='Username')
+          .form-group
+            label(for='email') Email
+            input.form-control(type='email', name='email', placeholder='Email')
+          .form-group
+            label(for='password') Password
+            input.form-control(type='password', name='password', placeholder='Password')
+          .form-group
+            label(for='passwordMatch') Re-Enter Password
+            input.form-control(type='password', name='passwordMatch', placeholder='Password')
+          button.btn.btn.btn-primary(type='submit')
+            | Sign Up

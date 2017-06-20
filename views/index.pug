@@ -1,5 +1,113 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  .navbar.navbar-default.navbar-fixed-top#mainNav
+    .container
+      .navbar-header
+        button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
+          span.sr-only Toggle navigation
+          span.icon-bar
+          span.icon-bar
+          span.icon-bar
+        a.navbar-brand(href='/')
+          i.fa.fa-shirtsinbulk
+          |  Super Laundry
+      .collapse.navbar-collapse
+
+
+        ul.nav.navbar-nav.navbar-right
+          li(class=(title == 'Home') ? 'active' : undefined)
+            a.page-scroll(href='#page-top') Home
+          li(class=(title == 'About') ? 'active' : undefined)
+            a.page-scroll(href='#about') About
+          li(class=(title == 'Services') ? 'active' : undefined)
+            a.page-scroll(href='#services') Services
+          li(class=(title == 'Contact') ? 'active' : undefined)
+            a.page-scroll(href='#contact') Contact
+          if !user
+            li(class=(title == 'Login') ? 'active' : undefined)
+              a(href='/login') Login
+          else
+            li.dropdown(class=(title == 'Account Management') ? 'active' : undefined)
+              a.dropdown-toggle(href='#', data-toggle='dropdown')
+                if user.profile.picture
+                  img(src=user.profile.picture)
+                else
+                  img(src=user.gravatar(60))
+                span= user.profile.name || user.email || user.id
+                i.caret
+              ul.dropdown-menu
+                li
+                  a(href='/account') My Account
+                li.divider
+                li
+                  a(href='/logout') Logout
+                  
+  header#home
+    .header-content
+      .header-content-inner
+        h1#homeHeading For all your laundry needs
+        hr
+        p One stop portal for all your laundry needs!
+        a.btn.btn-primary.btn-xl.page-scroll(href='#about') Find Out More
+        
+  section#about.bg-primary
+    .container
+      .row
+        .col-lg-8.col-lg-offset-2.text-center
+          h2.section-heading We've got what you need!
+          hr.light
+          p.text-faded
+            | Looking for the cheapest or the nearest laundry service? Laundry services that are the most convinent for you? Join us! Free Sign up!
+          a.page-scroll.btn.btn-default.btn-xl.sr-button(href='#services') Sign up Now!
+
+  section#services
+    .container
+      .row
+        .col-lg-12.text-center
+          h2.section-heading Our Services
+          hr
+    .container
+      .row
+        .col-lg-3.col-md-6.text-center
+          .service-box
+            i.fa.fa-4x.fa-map-marker.text-primary.sr-icons(aria-hidden='true')
+            h3 Current Location
+            p.text-muted We display laundry services based on your current location/area!
+        .col-lg-3.col-md-6.text-center
+          .service-box
+            i.fa.fa-4x.fa-rocket.text-primary.sr-icons
+            h3 Fast and Easy-to-use Services
+            p.text-muted Fast and easy to use interface and services!
+        .col-lg-3.col-md-6.text-center
+          .service-box
+            i.fa.fa-4x.fa-home.text-primary.sr-icons
+            h3 Door-to-door laundry service
+            p.text-muted Hassle-free door-to-door services!
+        .col-lg-3.col-md-6.text-center
+          .service-box
+            i.fa.fa-4x.fa-paper-plane.text-primary.sr-icons
+            h3 On the fly notification
+            p.text-muted We send live updates to you!
+            
+  aside.bg-dark
+    .container.text-center
+      .call-to-action
+        h2 Free Sign Up!
+        a.btn.btn-default.btn-xl.sr-button(href='/signup') Sign Up Now!
+
+  section#contact
+    .container
+      .row
+        .col-lg-8.col-lg-offset-2.text-center
+          h2.section-heading Let's Get In Touch!
+          hr.primary
+          p
+            | Have a burning question you want to ask? That's Great! Give us a call or send us an email and we will get back to you as soon as possible!
+        .col-lg-4.col-lg-offset-2.text-center
+          i.fa.fa-phone.fa-3x.sr-contact
+          p 1800-116-6868
+        .col-lg-4.text-center
+          i.fa.fa-envelope-o.fa-3x.sr-contact
+          p
+            a(href='mailto:your-email@your-domain.com') enquiry@superlaundry.com

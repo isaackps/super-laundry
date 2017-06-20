@@ -3,13 +3,23 @@ import cookieParser from 'cookie-parser';
 import Debug from 'debug';
 import express from 'express';
 import logger from 'morgan';
+import expressValidator from 'express-validator';
 // import favicon from 'serve-favicon';
 import path from 'path';
 import lessMiddleware from 'less-middleware';
+// import mongoose
+import mongoose from 'mongoose';
+
+
+// import route files
 import index from './routes/index';
+
 
 const app = express();
 const debug = Debug('super-laundry:app');
+
+//connect to mongo DB
+mongoose.connect('mongodb://localhost/super-laundry');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -19,9 +29,8 @@ app.set('view engine', 'pug');
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({
-  extended: false
-}));
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(expressValidator());
 
 app.use(cookieParser());
 app.use(lessMiddleware(path.join(__dirname, 'public')));
