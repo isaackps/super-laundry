@@ -23,13 +23,31 @@ import index from './routes/index';
 //API keys and passport configuration.
 const passportConfig = require('./routes/index');
 
+/**
+ * Create Express server.
+ */
+// keys
+//const fs = require('fs');
+//const key = fs.readFileSync('./keys/realtimemaps.pem');
+//const cert = fs.readFileSync('./keys/realtimemaps-cert.pem');
+
+//const option = {
+//  key: key,
+//  cert: cert
+//};
+
 // initialize the app
 const app = express();
 const debug = Debug('super-laundry:app');
+//const server = require('https').Server(option, app);
+//const io = require('socket.io')(server);
 
 //connect to mongo DB
 mongoose.connect('mongodb://localhost/super-laundry');
-const db = mongoose.connection;
+//const db = mongoose.connection;
+
+// Create seed
+require('./seed');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
