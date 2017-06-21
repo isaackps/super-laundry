@@ -42,6 +42,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
 
+app.use(session({
+    secret: 'secret',
+    saveUninitialized: true,
+    resave: true
+}));
+
 // passport init
 app.use(passport.initialize());
 app.use(passport.session());
@@ -69,11 +75,6 @@ app.use(expressValidator({
   }
 }));
 
-app.use(session({
-    secret: 'secret',
-    saveUninitialized: false,
-    resave: false
-}));
 
 // connect flash
 app.use(flash());

@@ -7,16 +7,33 @@ import passport from 'passport';
 const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
 
+function checkAuthenticated(req,res,next) {
+  if(req.isAuthenticated()){
+    res.redirect('/dashboard');
+    //return next();
+    console.log('success');
+  }else{
+    res.redirect('/');
+    console.log('')
+  }
+}
+
+
+
+
 /**
  * ONLY ALLOW ACCESS TO SECRET ROUTES IF USER IS LOGGED IN
  */
-// function loggedIn(req, res, next) {
-//     if (req.user) {
-//         next();
-//     } else {
-//         res.redirect('/login');
-//     }
-// };
+function loggedIn(req, res, next) {
+
+    console.log(req.user);
+
+    if (req.user) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+};
 
 // router.all('/*', function(req, res, next){
 //     loggedIn(req, res, next)
@@ -41,6 +58,20 @@ router.get('/login', (req, res, next) => {
 router.get('/signup', (req, res, next) => {
   res.render('signup', {
     title: 'Sign up'
+  });
+});
+
+//store locations
+router.get('/dashboard/storelocations', (req, res, next) => {
+  res.render('storelocations', {
+    title: 'Store Locations'
+  });
+});
+
+//register
+router.get('/dashboard/services', (req, res, next) => {
+  res.render('services', {
+    title: 'Services'
   });
 });
 
@@ -100,9 +131,13 @@ router.post('/signup', (req, res, next) => {
 
 router.get('/dashboard', (req, res, next) => {
     //loggedIn(req, res, next)
+
     res.render('dashboard', {
       title: 'Dashboard'
     });
+
+
+
 });
 
 passport.use(new LocalStrategy(
@@ -136,14 +171,15 @@ passport.use(new LocalStrategy(
   });
 
 router.post('/login',
-  passport.authenticate('local', {successRedirect:'/dashboard', failureRedirect:'/login', failureFlash: true}),
-  function(req, res) {
-    res.redirect('/dashboard');
-  });
+  passport.authenticate('local', {successRedirect:'/dashboard', failureRedirect:'/login', failureFlash: true}));
+  // function(req, res) {
+  //   console.log('login success')
+  //   res.redirect('/dashboard');
+  // });
 
 router.get('/logout', function(req,res){
   req.logout();
-
+  console.log(req.user)
   req.flash('success_msg', 'You are logged out');
 
   res.redirect('/login');

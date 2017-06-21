@@ -1,4 +1,4 @@
-.navbar.navbar-default.navbar-fixed-top#mainNav
+nav.navbar.navbar-inverse.bg-primary.navbar-fixed-top#mainNav
   .container
     .navbar-header
       button.navbar-toggle(type='button', data-toggle='collapse', data-target='.navbar-collapse')
@@ -6,36 +6,17 @@
         span.icon-bar
         span.icon-bar
         span.icon-bar
-      a.navbar-brand(href='/')
+      a.navbar-brand(href='/dashboard')
         i.fa.fa-shirtsinbulk
         |  Super Laundry
     .collapse.navbar-collapse
 
-
       ul.nav.navbar-nav.navbar-right
-        li(class=(title == 'Home') ? 'active' : undefined)
-          a.page-scroll(href='#page-top') Home
-        li(class=(title == 'About') ? 'active' : undefined)
-          a.page-scroll(href='#about') About
-        li(class=(title == 'Services') ? 'active' : undefined)
-          a.page-scroll(href='#services') Services
-        li(class=(title == 'Contact') ? 'active' : undefined)
-          a.page-scroll(href='#contact') Contact
-        if !user
-          li(class=(title == 'Login') ? 'active' : undefined)
-            a(href='/login') Login
-        else
-          li.dropdown(class=(title == 'Account Management') ? 'active' : undefined)
-            a.dropdown-toggle(href='#', data-toggle='dropdown')
-              if user.profile.picture
-                img(src=user.profile.picture)
-              else
-                img(src=user.gravatar(60))
-              span= user.profile.name || user.email || user.id
-              i.caret
-            ul.dropdown-menu
-              li
-                a(href='/account') My Account
-              li.divider
-              li
-                a(href='/logout') Logout
+        li.nav-item
+          a.nav-link(href='/dashboard') Dashboard
+        li.nav-item
+          a.nav-link(href='/dashboard/storelocations') Store Locations
+        li.nav-item
+          a.nav-link(href='/dashboard/services') Services
+        li.nav-item
+          a.nav-link(href='/logout') Logout
