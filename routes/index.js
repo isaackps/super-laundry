@@ -7,7 +7,10 @@ import bcrypt from 'bcrypt';
 import passport from 'passport';
 import mongodb from 'mongodb';
 
+import Facebook from '../models/facebook';
+
 const LocalStrategy = require('passport-local').Strategy;
+const facebookStrategy = require('passport-facebook').Strategy;
 const router = express.Router();
 
 function checkAuthenticated(req,res,next) {
@@ -21,7 +24,30 @@ function checkAuthenticated(req,res,next) {
 }
 
 
+//passport facebook loginMessage
+  // Passport facebook login
+  passport.use('facebook', new facebookStrategy({
+      clientID: '243669972799969',
+      clientSecret: '8eb5962c62aad9dff714c22e673ea153',
+      callbackURL: 'http://localhost:3000/auth/facebook/callback',
+      profileFields: ['name'],
+      passReqToCallback: true
+    },
+    function( req, accessToken, refreshToken, profile, done){
+        console.log(profile);
+    }));
 
+
+
+router.get('/auth/facebook',
+  passport.authenticate('facebook'));
+
+router.get('/auth/facebook/callback',
+  passport.authenticate('facebook', { failureRedirect: '/login' }),
+  function(req, res) {
+    // Successful authentication, redirect home.
+    res.redirect('/dashboard');
+  });
 
 /**
  * ONLY ALLOW ACCESS TO SECRET ROUTES IF USER IS LOGGED IN

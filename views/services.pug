@@ -5,9 +5,30 @@ block content
     .container-fluid
       .row
         .col-lg-12.text-center
-          .row
-            .col-lg-4.col-lg-offset-4.text-center
-              h2 Services
+          h2 Services
+          .row.cheapest
+            .col-md-3
+              i.fa.fa-thumbs-up.fa-4x
+              h3 Cheapest Dry Clean!
+              h4 Mrs Laundry
+              h4 @ $0.50/piece
+            .col-md-3
+              i.fa.fa-money.fa-4x
+              h3 Lowest Price for Ironing!
+              h4 Piing
+              h4 @ $0.30/piece
+            .col-md-3
+              i.fa.fa-handshake-o.fa-4x
+              h3 Most Value for Money Cloths Folding!
+              h4 ABC Clean
+              h4 @ $0.20/piece
+            .col-md-3
+              i.fa.fa-arrow-circle-down.fa-4x
+              h3 Discounted Washing!
+              h4 White Wash
+              h4 @ $0.10/piece
+          .row.serviceForm
+            .col-lg-4.col-lg-offset-4.text-center  
               if errors
                 each error, i in errors
                   .alert.alert-danger #{error.msg}
