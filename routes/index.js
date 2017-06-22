@@ -1,8 +1,11 @@
 import express from 'express';
 import User from '../models/user';
+import Place from '../models/places';
+import Service from '../models/services';
 import expressValidator from 'express-validator';
 import bcrypt from 'bcrypt';
 import passport from 'passport';
+import mongodb from 'mongodb';
 
 const LocalStrategy = require('passport-local').Strategy;
 const router = express.Router();
@@ -14,7 +17,6 @@ function checkAuthenticated(req,res,next) {
     console.log('success');
   }else{
     res.redirect('/');
-    console.log('')
   }
 }
 
@@ -47,6 +49,7 @@ router.get('/', (req, res, next) => {
   });
 });
 
+
 //login
 router.get('/login', (req, res, next) => {
   res.render('login', {
@@ -61,10 +64,25 @@ router.get('/signup', (req, res, next) => {
   });
 });
 
+// Get stores as JSON
+router.get('/json/storelocations', (req, res, next) => {
+
+  Place.find({}, (err, places) => {
+    res.json(places);
+  });
+});
+
 //store locations
 router.get('/dashboard/storelocations', (req, res, next) => {
   res.render('storelocations', {
     title: 'Store Locations'
+  });
+
+});
+
+router.get('/dashboard/settings', (req, res, next) => {
+  res.render('setting', {
+    title: 'Settings'
   });
 });
 
@@ -74,6 +92,47 @@ router.get('/dashboard/services', (req, res, next) => {
     title: 'Services'
   });
 });
+
+router.post('/dashboard/services', (req, res, next) => {
+  req.checkBody('contact', 'contact field cannot be empty').notEmpty();
+  req.checkBody('contact', 'contact must be a working number').len(8,9);
+
+  const errors = req.validationErrors();
+
+  if (errors) {
+    console.log(`errors: ${JSON.stringify(errors)}`);
+
+    res.render('services', {
+      title: 'Error! please make sure you have entered in the valid details!',
+      errors: errors
+    });
+  }
+  else {
+    const service = req.body.service;
+    const company = req.body.company;
+    const collectionTime = req.body.collectionTime;
+    const contact = req.body.contact;
+
+    const services = new Service({
+      service: service,
+      company: company,
+      collectionTime: collectionTime,
+      contact: contact
+    });
+
+    services.save((err, service) => {
+      if(err) {
+        console.log(err);
+        res.render('services', {
+          title: 'Error! Dont Know Why? Must be computer Stupid!!!'
+        });
+      }
+      req.flash('success_msg', 'Your service has been entered, a confirmation emil will be sent to you shortly. Thank You!');
+      res.redirect('/dashboard/services');
+    });
+  }
+});
+
 
 router.post('/signup', (req, res, next) => {
   // validation
@@ -129,12 +188,14 @@ router.post('/signup', (req, res, next) => {
 });     // close router.post
 
 
-router.get('/dashboard', (req, res, next) => {
+router.get('/dashboard', loggedIn, (req, res, next) => {
     //loggedIn(req, res, next)
-
+    //const username = req.user.username;
     res.render('dashboard', {
-      title: 'Dashboard'
+      title: 'Dashboard',
+      username: 'Welcome '+req.user.username
     });
+
 
 
 
@@ -184,6 +245,10 @@ router.get('/logout', function(req,res){
 
   res.redirect('/login');
 });
+
+
+
+
 
 
 export default router;

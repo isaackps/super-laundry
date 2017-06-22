@@ -1,3 +1,26 @@
 extends dashboard_layout
 
 block content
+  section#dashboard
+    .container-fluid.dashMsg
+      .row
+        .col-lg-12.text-center
+          h2.username= username
+          h3 Do you need some laundry services today?
+    .container-fluid.dashIcons
+      .row
+        .col-lg-4.col-md-6.text-center
+          .service-box
+            a.btn.btn-default.dashBtn(type='button' href='/dashboard/storelocations')
+              i.fa.fa-5x.fa-map-marker.text-primary.sr-icons(aria-hidden='true')
+              h3 Check Location
+        .col-lg-4.col-md-6.text-center
+          .service-box
+            a.btn.btn-default.dashBtn(type='button' href='/dashboard/services')
+              i.fa.fa-5x.fa-home.text-primary.sr-icons
+              h3 Book a Laundry Service
+        .col-lg-4.col-md-6.text-center
+          .service-box
+            a.btn.btn-default.dashBtn(type='button' href='/dashboard/settings')
+              i.fa.fa-spin.fa-5x.fa-cog.text-primary.sr-icons
+              h3 Notification Settings

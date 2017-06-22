@@ -1,3 +1,53 @@
 extends dashboard_layout
 
 block content
+  section#services
+    .container-fluid
+      .row
+        .col-lg-12.text-center
+          .row
+            .col-lg-4.col-lg-offset-4.text-center
+              h2 Services
+              if errors
+                each error, i in errors
+                  .alert.alert-danger #{error.msg}
+              if success_msg
+                each msg, i in success_msg
+                  .alert.alert-success #{success_msg}
+              if error_msg
+                each msg, i in error_msg
+                  .alert.alert-danger #{error_msg}   
+              if error
+                each msg, i in error
+                  .alert.alert-danger #{error}
+              form(role='form', method='POST', action='/dashboard/services')
+                .form-group
+                  h4 Please choose a service
+                  select.form-control(name='service')
+                    option Please Select
+                    option Dry Clean 
+                    option Ironing
+                    option Cloths Folding
+                    option Mega Wash
+                .form-group
+                  h4 Please choose a company
+                  select.form-control(name='company')
+                    option Please Select
+                    option ABC Clean
+                    option Mrs Laundry
+                    option Blue Lagoon
+                    option White Wash
+                    option Piing
+                .form-group
+                  h4 Please select the collection time
+                  select.form-control(name='collectionTime')
+                    option Please Select
+                    option 6am - 10am
+                    option 10am - 2pm
+                    option 2pm - 6pm
+                    option 6pm - 9pm   
+                .form-group
+                  h4 Please enter your contact number
+                  input.form-control(type='number', placeholder='contact number', name='contact')
+                  button.btn.btn.btn-primary.serviceBtn(type='submit')
+                    | Sign Up

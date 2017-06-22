@@ -1,0 +1,10 @@
+extends dashboard_layout
+
+block content 
+    h3.
+      Stores
+    ul
+      each store, i in storelist
+        li#store_list_item
+          a #{store.longitude} longitude, #{store.latitude} latitude,
+          

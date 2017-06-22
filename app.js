@@ -38,7 +38,7 @@ const passportConfig = require('./routes/index');
 
 // initialize the app
 const app = express();
-const debug = Debug('super-laundry:app');
+//const debug = Debug('super-laundry:app');
 //const server = require('https').Server(option, app);
 //const io = require('socket.io')(server);
 
@@ -46,8 +46,8 @@ const debug = Debug('super-laundry:app');
 mongoose.connect('mongodb://localhost/super-laundry');
 //const db = mongoose.connection;
 
-// Create seed
-require('./seed');
+// Create seed (only need if the database got nothing)
+// require('./seed');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -55,7 +55,7 @@ app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
-app.use(logger('dev'));
+//app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(expressValidator());
@@ -128,6 +128,7 @@ app.use((err, req, res, next) => {
 
 // Handle uncaughtException
 process.on('uncaughtException', (err) => {
+  console.log(err);
   debug('Caught exception: %j', err);
   process.exit(1);
 });
