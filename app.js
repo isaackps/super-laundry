@@ -129,7 +129,7 @@ app.use((err, req, res, next) => {
 // Handle uncaughtException
 process.on('uncaughtException', (err) => {
   console.log(err);
-  debug('Caught exception: %j', err);
+  //debug('Caught exception: %j', err);
   process.exit(1);
 });
 

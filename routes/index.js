@@ -40,7 +40,7 @@ function checkAuthenticated(req,res,next) {
 
 
 router.get('/auth/facebook',
-  passport.authenticate('facebook'));
+  passport.authenticate('facebook', {scope:['email', 'name']}));
 
 router.get('/auth/facebook/callback',
   passport.authenticate('facebook', { failureRedirect: '/login' }),
