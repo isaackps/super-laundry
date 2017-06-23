@@ -2,10 +2,10 @@
   "name": "super-laundry",
   "version": "0.0.0",
   "private": true,
-  "main": "app.js",
   "scripts": {
     "start": "node app.js",
-    "test": "mocha --recursive './test/*Test.js' --compilers js:babel-core/register"
+    "test": "mocha --recursive './test/*Test.js' --compilers js:babel-core/register",
+    "postinstall": "npm rebuild node-sass"
   },
   "dependencies": {
     "babel-core": "^6.23.1",
