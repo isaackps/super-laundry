@@ -4,7 +4,7 @@
   "private": true,
   "main": "app.js",
   "scripts": {
-    "start": "node ./bin/start",
+    "start": "node app.js",
     "test": "mocha --recursive './test/*Test.js' --compilers js:babel-core/register"
   },
   "dependencies": {
@@ -32,7 +32,6 @@
     "passport-http": "^0.3.0",
     "passport-local": "^1.0.0",
     "pug": "^2.0.0-beta11",
-    "serve-favicon": "~2.3.2",
     "socket.io": "^2.0.3"
   },
   "devDependencies": {
