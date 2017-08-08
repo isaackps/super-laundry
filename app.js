@@ -9,7 +9,7 @@ import session from 'express-session';
 //import flash from 'express-flash';
 import flash from 'connect-flash';
 //import bcrypt from 'bcrypt';
-// import favicon from 'serve-favicon';
+import favicon from 'serve-favicon';
 import path from 'path';
 import lessMiddleware from 'less-middleware';
 // import mongoose
@@ -54,7 +54,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 //app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
