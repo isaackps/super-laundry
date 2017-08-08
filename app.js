@@ -43,11 +43,11 @@ const app = express();
 //const io = require('socket.io')(server);
 
 //connect to mongo DB
-mongoose.connect('mongodb://localhost/super-laundry');
+mongoose.connect('mongodb://heroku_r7mpvdtx:heroku_r7mpvdtx@ds127892.mlab.com:27892/heroku_r7mpvdtx');
 //const db = mongoose.connection;
 
 // Create seed (only need if the database got nothing)
-// require('./seed');
+require('./seed');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
