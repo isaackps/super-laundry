@@ -43,7 +43,7 @@ const debug = Debug('super-laundry:app');
 //const io = require('socket.io')(server);
 
 //connect to mongo DB
-mongoose.connect('mongodb://heroku_r7mpvdtx:heroku_r7mpvdtx@ds127892.mlab.com:27892/heroku_r7mpvdtx');
+mongoose.connect('mongodb://localhost/super-laundry');
 //const db = mongoose.connection;
 
 // Create seed (only need if the database got nothing)
