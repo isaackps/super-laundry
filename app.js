@@ -47,7 +47,7 @@ mongoose.connect('mongodb://heroku_r7mpvdtx:heroku_r7mpvdtx@ds127892.mlab.com:27
 //const db = mongoose.connection;
 
 // Create seed (only need if the database got nothing)
-require('./seed');
+//require('./seed');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
