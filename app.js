@@ -54,7 +54,7 @@ app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
 //app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -129,7 +129,7 @@ app.use((err, req, res, next) => {
 // Handle uncaughtException
 process.on('uncaughtException', (err) => {
   console.log(err);
-  debug('Caught exception: %j', err);
+  //debug('Caught exception: %j', err);
   process.exit(1);
 });
 
