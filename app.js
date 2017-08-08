@@ -38,7 +38,7 @@ const passportConfig = require('./routes/index');
 
 // initialize the app
 const app = express();
-//const debug = Debug('super-laundry:app');
+const debug = Debug('super-laundry:app');
 //const server = require('https').Server(option, app);
 //const io = require('socket.io')(server);
 
@@ -129,7 +129,7 @@ app.use((err, req, res, next) => {
 // Handle uncaughtException
 process.on('uncaughtException', (err) => {
   console.log(err);
-  //debug('Caught exception: %j', err);
+  debug('Caught exception: %j', err);
   process.exit(1);
 });
 
