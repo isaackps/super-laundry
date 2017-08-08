@@ -47,14 +47,14 @@ mongoose.connect('mongodb://localhost/super-laundry');
 //const db = mongoose.connection;
 
 // Create seed (only need if the database got nothing)
-//require('./seed');
+// require('./seed');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
 // uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(favicon(path.join(__dirname, 'public', 'favicon.png')));
 //app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
